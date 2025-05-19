@@ -1,0 +1,33 @@
+from scapy.all import sniff, IP, TCP, UDP, Raw
+
+def packet_callback(packet):
+    print("="*60)
+    
+    if IP in packet:
+        ip_layer = packet[IP]
+        print(f"IP Packet: {ip_layer.src} -> {ip_layer.dst}")
+        print(f"Protocol: {ip_layer.proto}")
+    
+    if TCP in packet:
+        tcp_layer = packet[TCP]
+        print(f"TCP Port: {tcp_layer.sport} -> {tcp_layer.dport}")
+    elif UDP in packet:
+        udp_layer = packet[UDP]
+        print(f"UDP Port: {udp_layer.sport} -> {udp_layer.dport}")
+
+    if Raw in packet:
+        payload = packet[Raw].load
+        try:
+            print(f"Payload: {payload.decode('utf-8', errors='ignore')}")
+        except:
+            print("Payload: <binary data>")
+
+def main():
+    print("=== Educational Packet Sniffer Started ===")
+    print("Press CTRL+C to stop...\n")
+
+    # Capture packets on the default interface
+    sniff(filter="tcp", prn=packet_callback, store=False)
+
+if __name__ == "__main__":
+    main()
