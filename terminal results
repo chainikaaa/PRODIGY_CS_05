@@ -1,8 +1,0 @@
-PS C:\Users\chain\OneDrive\Desktop\pass.txt> python brute_force_test.py
->> 
-[-] Failed login: admin:123456
-[+] Successfull login: admin:password
-[-] Failed login: admin:admin
-[-] Failed login: admin:letmein
-[-] Failed login: admin:admin123
-PS C:\Users\chain\OneDrive\Desktop\pass.txt>
